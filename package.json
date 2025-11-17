@@ -1,0 +1,29 @@
+{
+  "name": "adventofcode2025",
+  "version": "1.0.0",
+  "description": "Framework and solutions for Advent of Code 2025 puzzles",
+  "keywords": [
+    "Advent",
+    "of",
+    "Code"
+  ],
+  "homepage": "https://github.com/mountsisw/adventofcode2025#readme",
+  "bugs": {
+    "url": "https://github.com/mountsisw/adventofcode2025/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mountsisw/adventofcode2025.git"
+  },
+  "license": "ISC",
+  "author": "Mount Si Software, LLC",
+  "type": "commonjs",
+  "main": "httpd.js",
+  "scripts": {
+    "start": "node httpd.js"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0"
+  }
+}
