@@ -30,11 +30,13 @@ solutions.set("25", {title: "Combo Breaker", part1: "Day25/Part1.html", part2: "
 
 function init()
 {
-    let firstDate = Date.UTC(2020, 10, 29, 5, 0, 0);
-    let firstPuzzle = Date.UTC(2020, 11, 1, 5, 0, 0);
-    let lastPuzzle = Date.UTC(2020, 11, 25, 5, 0, 0);
+    //TODO Adjust first date for current year
+    let firstDate = Date.UTC(2025, 11, 1, 5, 0, 0);
+    //let firstDate = Date.now();
+    let firstPuzzle = Date.UTC(2025, 11, 1, 5, 0, 0);
+    let lastPuzzle = Date.UTC(2025, 11, 12, 5, 0, 0);
     let containerDiv = document.getElementById("days");
-    for (let nLoop = 1; nLoop <= 28; nLoop++)
+    for (let nLoop = 1; nLoop <= 12; nLoop++)
     {
         let cellDiv = document.createElement("div");
         cellDiv.className = "cells";
