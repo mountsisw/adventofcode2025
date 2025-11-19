@@ -30,9 +30,7 @@ solutions.set("25", {title: "Combo Breaker", part1: "Day25/Part1.html", part2: "
 
 function init()
 {
-    //TODO Adjust first date for current year
-    let firstDate = Date.UTC(2025, 11, 1, 5, 0, 0);
-    //let firstDate = Date.now();
+    let firstDate = Date.UTC(2025, 11, 1, 5, 0, 0); //first date present on calender
     let firstPuzzle = Date.UTC(2025, 11, 1, 5, 0, 0);
     let lastPuzzle = Date.UTC(2025, 11, 12, 5, 0, 0);
     let containerDiv = document.getElementById("days");
@@ -64,7 +62,10 @@ function showInfo(event)
     let dateInfo = info.get(event.target.id);
     console.log("Entered " + event.target.id + ": " + dateInfo.unlockTime);
     dateInfo.content.style.display = "none";
+    let backgroundImageStyle = event.target.style.backgroundImage;
+    event.target.style.backgroundImage = "linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), " + backgroundImageStyle;
     let newDiv = document.createElement("div");
+    newDiv.className = "puzzle";
     event.target.append(newDiv);
     if (Date.now() < dateInfo.unlockTime)
     {
@@ -110,6 +111,7 @@ function showInfo(event)
             info.set(event.target.id, dateInfo);
         }
         newDiv.remove();
+        event.target.style.backgroundImage = backgroundImageStyle;
         dateInfo.content.style.display = "";
     }
 }

@@ -24,6 +24,11 @@ label:hover {
     outline: 1px solid;
 }
 
+.outer {
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
 .header {
     width: 100%;
     display: flex;
