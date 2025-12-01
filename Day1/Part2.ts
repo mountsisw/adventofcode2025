@@ -14,25 +14,20 @@ export default class Part2 extends PuzzlePart
         const fullRotations = Math.floor(clicks / 100);
         this.pointedAtZero += fullRotations;
         const remainderClicks = clicks % 100;
-        if (record[0] === 'R')
+        this.position += record[0] === 'L' ? -remainderClicks : remainderClicks;
+        if (this.position < 0)
         {
-            this.position += remainderClicks;
-            if (this.position >= 100)
-            {
-                this.position -= 100;
-                this.pointedAtZero++;
-            }
+            this.position = 100 + this.position;
+            if (this.position + remainderClicks > 100) this.pointedAtZero++;
         }
-        else if (record[0] === 'L')
+        else if (this.position === 0)
         {
-            this.position -= remainderClicks;
-            if (this.position < 0)
-            {
-                this.position += 100;
-                if (this.position + remainderClicks > 100) this.pointedAtZero++;
-            } else if (this.position === 0) {
-                this.pointedAtZero++;
-            }
+            this.pointedAtZero++;
+        }
+        else if (this.position >= 100)
+        {
+            this.position -= 100;
+            this.pointedAtZero++;
         }
         const output = `${this.position} => ${this.pointedAtZero}`;
         div = document.createElement("div");
