@@ -1,0 +1,41 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "chrome",
+      "request": "launch",
+      "name": "Launch Chrome (Auto)",
+      "url": "http://localhost:3000/aoc2025",
+      "webRoot": "${workspaceFolder}",
+      "sourceMaps": true,
+      "sourceMapPathOverrides": {
+        "/*": "${webRoot}/*"
+      }
+    },
+    {
+      "type": "chrome",
+      "request": "attach",
+      "name": "Attach to Chrome",
+      "port": 9222,
+      "webRoot": "${workspaceFolder}",
+      "urlFilter": "http://localhost:3000/*"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Debug Node Server",
+      "program": "${workspaceFolder}/httpd.js",
+      "console": "integratedTerminal",
+      "env": {
+        "PORT": "3000"
+      }
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Server + Chrome",
+      "configurations": ["Debug Node Server", "Attach to Chrome"],
+      "stopAll": true
+    }
+  ]
+}

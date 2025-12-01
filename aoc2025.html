@@ -4,6 +4,7 @@
         <link href='//fonts.googleapis.com/css?family=Source+Code+Pro:300&subset=latin,latin-ext' rel='stylesheet' type='text/css'/>
         <link href='aoc2025.css' rel='stylesheet' type='text/css' />
         <script type="module" src="./aoc2025.js"></script>
+        <script type="module" src="./aocFW.js"></script>
     </head>
     <body>
         <div class = "outer">
@@ -15,6 +16,27 @@
                 <div><a href="https://www.youtube.com/channel/UCSNNR5xEVcrq3qW5Lr-O1Uw">VODs on YouTube</a></div>
             </div>
             <div id="days" class="days"></div>
+            <div class="solution">
+                <div class="fileInput">
+                    <input type="file" id="puzzleInput" />
+                    <span id="fileName" class="fileName">No file selected</span>
+                    <span id="recordCount" class="recordCount">0 records</span>
+                    <progress id="fileProgress" value="0" max="100"></progress>
+                </div>
+                <div class="status">
+                    <span id="ready" class="puzzle">Ready</span>
+                    <span id="solving" class="">Solving...</span>
+                    <span id="done" class="">Done!</span>
+                    <span id="answer" class="answer">Answer</span>
+                </div>
+                <div class="puzzleDisplay">
+                    <div id="inputDisplay" class="inputDisplay">Input Display</div>
+                    <div id="outputDisplay" class="outputDisplay">Output Display</div>
+                </div>
+            </div>
+            <div class="footer">
+                <div>Developed by Mount Si Software, LLC &copy; 2025</div>
+            </div>
         </div>
     </body>
 </html>

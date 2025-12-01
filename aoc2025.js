@@ -1,8 +1,13 @@
 // @ts-check
+import { doPart } from './aocFW.js';
 
 const dateCellInformation = new Map(); // used to store info about each date cell
 const solutions = new Map(); // used to store solution info
-/* solutions.set("1", {title: "Report Repair", part1: "Day1/Part1.html", part2: "Day1/Part2.html", bg: "Day1/Day1.png"}); */
+solutions.set("1", {title: "Secret Entrance", part1: "Day1/Part1.js", part2: "Day1/Part2.js", bg: "Day1/Day1.png"});
+
+// Make doPart available globally for javascript: URLs
+// @ts-ignore
+window.doPart = doPart;
 
 // Initialize the calendar when the window loads
 window.onload = () =>
@@ -89,16 +94,17 @@ function showInfo(event)
         newDiv.append(anchor);
         anchor.innerText = solution.title;
         anchor.href = "https://adventofcode.com/2025/day/" + event.target.id;
+        anchor.target = "_blank";
         newDiv.append(document.createElement("br"));
         anchor = document.createElement("a");
         newDiv.append(anchor);
         anchor.innerText = "Part 1";
-        anchor.href = solution.part1;
+        anchor.href = `javascript:doPart("${solution.part1}");`;
         newDiv.append(document.createElement("br"));
         anchor = document.createElement("a");
         newDiv.append(anchor);
         anchor.innerText = "Part 2";
-        anchor.href = solution.part2;
+        anchor.href = `javascript:doPart("${solution.part2}");`;
     }
     else
     {
@@ -107,6 +113,7 @@ function showInfo(event)
         newDiv.append(anchor);
         anchor.innerText = "Puzzle";
         anchor.href = "https://adventofcode.com/2025/day/" + event.target.id;
+        anchor.target = "_blank";
     }
     // set up mouseleave event to clean up when the mouse leaves the cell
     event.target.onmouseleave = (event) =>
