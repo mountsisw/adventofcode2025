@@ -1,88 +1,94 @@
-window.onload = init;
+// @ts-check
 
-let info = new Map();
-let solutions = new Map();
-solutions.set("1", {title: "Report Repair", part1: "Day1/Part1.html", part2: "Day1/Part2.html", bg: "Day1/Day1.png"});
-solutions.set("2", {title: "Password Philosophy", part1: "Day2/Part1.html", part2: "Day2/Part2.html", bg: "Day2/Day2.png"});
-solutions.set("3", {title: "Toboggan Trajectory", part1: "Day3/Part1.html", part2: "Day3/Part2.html", bg: "Day3/Day3.png"});
-solutions.set("4", {title: "Passport Processing", part1: "Day4/Part1.html", part2: "Day4/Part2.html", bg: "Day4/Day4.png"});
-solutions.set("5", {title: "Binary Boarding", part1: "Day5/Part1.html", part2: "Day5/Part2.html", bg: "Day5/Day5.png"});
-solutions.set("6", {title: "Custom Customs", part1: "Day6/Part1.html", part2: "Day6/Part2.html", bg: "Day6/Day6.png"});
-solutions.set("7", {title: "Handy Haversacks", part1: "Day7/Part1.html", part2: "Day7/Part2.html", bg: "Day7/Day7.png"});
-solutions.set("8", {title: "Handheld Halting", part1: "Day8/Part1.html", part2: "Day8/Part2.html", bg: "Day8/Day8.png"});
-solutions.set("9", {title: "Encoding Error", part1: "Day9/Part1.html", part2: "Day9/Part2.html", bg: "Day9/Day9.png"});
-solutions.set("10", {title: "Adapter Array", part1: "Day10/Part1.html", part2: "Day10/Part2.html", bg: "Day10/Day10.png"});
-solutions.set("11", {title: "Seating System", part1: "Day11/Part1.html", part2: "Day11/Part2.html", bg: "Day11/Day11.png"});
-solutions.set("12", {title: "Rain Risk", part1: "Day12/Part1.html", part2: "Day12/Part2.html", bg: "Day12/Day12.png"});
-solutions.set("13", {title: "Shuttle Search", part1: "Day13/Part1.html", part2: "Day13/Part2.html", bg: "Day13/Day13.png"});
-solutions.set("14", {title: "Docking Data", part1: "Day14/Part1.html", part2: "Day14/Part2.html", bg: "Day14/Day14.png"});
-solutions.set("15", {title: "Rambunctious Recitation", part1: "Day15/Part1.html", part2: "Day15/Part2.html", bg: "Day15/Day15.png"});
-solutions.set("16", {title: "Ticket Translation", part1: "Day16/Part1.html", part2: "Day16/Part2.html", bg: "Day16/Day16.png"});
-solutions.set("17", {title: "Conway Cubes", part1: "Day17/Part1.html", part2: "Day17/Part2.html", bg: "Day17/Day17.png"});
-solutions.set("18", {title: "Operation Order", part1: "Day18/Part1.html", part2: "Day18/Part2.html", bg: "Day18/Day18.png"});
-solutions.set("19", {title: "Monster Messages", part1: "Day19/Part1.html", part2: "Day19/Part2.html", bg: "Day19/Day19.png"});
-solutions.set("20", {title: "Jurassic Jigsaw", part1: "Day20/Part1.html", part2: "Day20/Part2.html", bg: "Day20/Day20.png"});
-solutions.set("21", {title: "Allergen Assessment", part1: "Day21/Part1.html", part2: "Day21/Part2.html", bg: "Day21/Day21.png"});
-solutions.set("22", {title: "Crab Combat", part1: "Day22/Part1.html", part2: "Day22/Part2.html", bg: "Day22/Day22.png"});
-solutions.set("23", {title: "Crab Cups", part1: "Day23/Part1.html", part2: "Day23/Part2.html", bg: "Day23/Day23.png"});
-solutions.set("24", {title: "Lobby Layout", part1: "Day24/Part1.html", part2: "Day24/Part2.html", bg: "Day24/Day24.png"});
-solutions.set("25", {title: "Combo Breaker", part1: "Day25/Part1.html", part2: "Day25/Part2.html", bg: "Day25/Day25.png"});
+const dateCellInformation = new Map(); // used to store info about each date cell
+const solutions = new Map(); // used to store solution info
+/* solutions.set("1", {title: "Report Repair", part1: "Day1/Part1.html", part2: "Day1/Part2.html", bg: "Day1/Day1.png"}); */
 
-function init()
+// Initialize the calendar when the window loads
+window.onload = () =>
 {
-    let firstDate = Date.UTC(2025, 11, 1, 5, 0, 0); //first date present on calender
-    let firstPuzzle = Date.UTC(2025, 11, 1, 5, 0, 0);
-    let lastPuzzle = Date.UTC(2025, 11, 12, 5, 0, 0);
-    let containerDiv = document.getElementById("days");
-    for (let nLoop = 1; nLoop <= 12; nLoop++)
+    // All date/time vaules are in Eastern Time (New York), since Advent of Code uses that time zone
+    const firstDate = Date.UTC(2025, 11, 1, 5, 0, 0); // first date present on calender
+    const lastDate = Date.UTC(2025, 11, 12, 5, 0, 0); // last date present on calender
+    const firstPuzzle = Date.UTC(2025, 11, 1, 5, 0, 0); // first date a puzzle is available
+    const lastPuzzle = Date.UTC(2025, 11, 12, 5, 0, 0); // last date a puzzle is available
+
+    const containerDiv = document.getElementById("days");
+    if (containerDiv == null) { console.error("No container div"); return; }
+    for (let thisDate = firstDate; thisDate <= lastDate; thisDate += 24 * 60 * 60 * 1000) // increment by one day
     {
-        let cellDiv = document.createElement("div");
+        // Create the cell for this date
+        const cellDiv = document.createElement("div");
         cellDiv.className = "cells";
-        let dateDiv = document.createElement("div");
+        
+        // Create the date div that displays the day number
+        const dateDiv = document.createElement("div");
         dateDiv.className = "dates";
-        let thisDate = new Date(firstDate);
-        let dateString = thisDate.toLocaleDateString('en-US', {timeZone: 'America/New_York', day: 'numeric'});
+        
+        // Set the date text based on Eastern Time
+        const dateString = new Date(thisDate).toLocaleDateString('en-US', {timeZone: 'America/New_York', day: 'numeric'});
         dateDiv.innerText = dateString;
-        if (firstDate >= firstPuzzle && firstDate <= lastPuzzle)
+
+        // If this date has a puzzle, set up the cell accordingly
+        if (thisDate >= firstPuzzle && thisDate <= lastPuzzle)
         {
             dateDiv.className += " puzzle";
             cellDiv.id = dateString;
             cellDiv.onmouseenter = showInfo;
-            info.set(dateString, {unlockTime: firstDate, timer: 0, content: dateDiv});
+            dateCellInformation.set(dateString, {unlockTime: thisDate, timer: 0, content: dateDiv});
+
+            // If a solution exists for this date, set the background image
             if (solutions.has(dateString)) cellDiv.style.backgroundImage = "url(" + solutions.get(dateString).bg + ")";
         }
+
+        // Assemble the cell and add it to the container
         cellDiv.append(dateDiv);
         containerDiv.append(cellDiv);
-        firstDate += 24 * 60 * 60 * 1000;
     }
 }
 
+// Show information about the puzzle when the mouse enters a date cell
+/**
+ * @param {MouseEvent} event
+ */
 function showInfo(event)
 {
-    let dateInfo = info.get(event.target.id);
-    console.log("Entered " + event.target.id + ": " + dateInfo.unlockTime);
+    if (!(event.target instanceof HTMLElement)) { console.error("Not an HTML Element"); return; }
+    // get info for this date cell
+    const dateInfo = dateCellInformation.get(event.target.id);
+    // hide the current content
     dateInfo.content.style.display = "none";
-    let backgroundImageStyle = event.target.style.backgroundImage;
+    // preserve the current background image
+    const backgroundImageStyle = event.target.style.backgroundImage;
+    // set a dark overlay on the background image
     event.target.style.backgroundImage = "linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), " + backgroundImageStyle;
-    let newDiv = document.createElement("div");
+    // create a new div to hold the puzzle info
+    const newDiv = document.createElement("div");
     newDiv.className = "puzzle";
     event.target.append(newDiv);
+    // determine what to show based on the current time
     if (Date.now() < dateInfo.unlockTime)
     {
-        if (dateInfo.timer == 0)
+        // puzzle is not yet unlocked, show countdown
+        // if no timer is running, start one
+        if (dateInfo.timer === 0)
         {
+            // display initial countdown value
             countdown(newDiv, dateInfo.unlockTime);
+            // start timer to update countdown every second
             dateInfo.timer = window.setInterval(countdown, 1000, newDiv, dateInfo.unlockTime);
-            info.set(event.target.id, dateInfo);
+            // save updated info (timer value) back to map
+            dateCellInformation.set(event.target.id, dateInfo);
         }
     }
     else if (solutions.has(event.target.id))
     {
-        let solution = solutions.get(event.target.id);
+        // puzzle is unlocked and solution exists, show solution links
+        const solution = solutions.get(event.target.id);
         let anchor = document.createElement("a");
         newDiv.append(anchor);
         anchor.innerText = solution.title;
-        anchor.href = "https://adventofcode.com/2020/day/" + event.target.id;
+        anchor.href = "https://adventofcode.com/2025/day/" + event.target.id;
         newDiv.append(document.createElement("br"));
         anchor = document.createElement("a");
         newDiv.append(anchor);
@@ -96,42 +102,55 @@ function showInfo(event)
     }
     else
     {
-        let anchor = document.createElement("a");
+        // puzzle is unlocked but solutions are not ready, show link to puzzle
+        const anchor = document.createElement("a");
         newDiv.append(anchor);
         anchor.innerText = "Puzzle";
-        anchor.href = "https://adventofcode.com/2020/day/" + event.target.id;
+        anchor.href = "https://adventofcode.com/2025/day/" + event.target.id;
     }
-    event.target.onmouseleave = function (event) {
-        console.log("Left " + event.target.id);
-        let dateInfo = info.get(event.target.id);
+    // set up mouseleave event to clean up when the mouse leaves the cell
+    event.target.onmouseleave = (event) =>
+    {
+        if (!(event.target instanceof HTMLElement)) { console.error("Not an HTML Element"); return; }
+        // get info for this date cell
+        const dateInfo = dateCellInformation.get(event.target.id);
+        // stop any running timer
         if (dateInfo.timer > 0)
         {
             window.clearInterval(dateInfo.timer);
             dateInfo.timer = 0;
-            info.set(event.target.id, dateInfo);
+            dateCellInformation.set(event.target.id, dateInfo);
         }
+        // remove the new div
         newDiv.remove();
+        // restore the original background image
         event.target.style.backgroundImage = backgroundImageStyle;
+        // show the original content
         dateInfo.content.style.display = "";
     }
 }
 
+// Display the time until the puzzle unlocks
+/**
+ * @param {HTMLDivElement} target
+ * @param {number} unlockTime
+ */
 function countdown(target, unlockTime)
 {
     let waitTime = unlockTime - Date.now();
-    let denom = 24 * 60 * 60 * 1000;
-    let days = Math.floor(waitTime / denom);
-    let countdown = days > 0 ? String(days) + ":" : "";
-    waitTime -= days * denom;
-    denom /= 24;
-    let hours = Math.floor(waitTime / denom);
-    countdown += (hours > 9 ? "" : "0") + String(hours) + ":";
-    waitTime -= hours * denom;
-    denom /= 60;
-    let minutes = Math.floor(waitTime / denom);
-    countdown += (minutes > 9 ? "" : "0") + String(minutes) + ":";
-    waitTime -= minutes * denom;
-    denom /= 60;
-    let seconds = Math.ceil(waitTime / denom);
-    target.innerText = "Unlocks in " + countdown + (seconds > 9 ? "" : "0") + String(seconds);
+    let denom = 24 * 60 * 60 * 1000; // milliseconds in a day
+    const days = Math.floor(waitTime / denom); // number of whole days remaining
+    let countdown = days > 0 ? String(days) + ":" : ""; // start countdown string, include days if > 0
+    waitTime -= days * denom; // reduce waitTime by number of whole days
+    denom /= 24; // milliseconds in an hour
+    const hours = Math.floor(waitTime / denom); // number of whole hours remaining
+    countdown += (hours > 9 ? "" : "0") + String(hours) + ":"; // add hours to countdown string with leading zero if needed
+    waitTime -= hours * denom; // reduce waitTime by number of whole hours
+    denom /= 60; // milliseconds in a minute
+    const minutes = Math.floor(waitTime / denom); // number of whole minutes remaining
+    countdown += (minutes > 9 ? "" : "0") + String(minutes) + ":"; // add minutes to countdown string with leading zero if needed
+    waitTime -= minutes * denom; // reduce waitTime by number of whole minutes
+    denom /= 60; // milliseconds in a second    
+    const seconds = Math.ceil(waitTime / denom); // round up for number of whole seconds remaining
+    target.innerText = "Unlocks in " + countdown + (seconds > 9 ? "" : "0") + String(seconds); // add seconds to countdown string with leading zero if needed, and set the target text
 }
