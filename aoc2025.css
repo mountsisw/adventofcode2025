@@ -1,3 +1,9 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
 body {
   background: #0f0f23; /*337 x 5*/
   color: #cccccc;
@@ -6,7 +12,6 @@ body {
   text-align: center;
   vertical-align: middle;
   width: 100%;
-  margin: 0;
   border: none;
 }
 
@@ -30,6 +35,8 @@ label:hover {
     display: flex;
     flex-direction: column;
     align-items: center;
+    height: 100vh; /* exactly viewport height to pin footer */
+    overflow: hidden; /* prevent page scroll; let .solution scroll */
 }
 
 .header {
@@ -67,28 +74,82 @@ label:hover {
 }
 
 .puzzle {
-    color: white;
     font-weight: bolder;
+}
+
+.solution {
+    margin-top: 1rem;
+    width: 100%;
+    flex: 1 1 auto;
+    overflow: hidden; /* let only .puzzleDisplay scroll */
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
 }
 
 .status {
     width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1rem;
+    padding: 0.5rem 0;
+    box-sizing: border-box;
+    flex: 0 0 auto; /* fixed-height header within .solution */
+    align-items: center; /* vertically center grid items */
+}
+
+input[type="file"] {
+    display: none;
+}
+
+progress {
+    width: 100%;
+    display: none;
+}
+
+.statusStep, .activeStep {
+    border: none;
+    font-weight: lighter;
     display: flex;
-    justify-content: space-between
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.activeStep {
+    border: 1px solid white;
+    font-weight: extra-bold;
+}
+
+.activeStep:hover {
+    cursor: default;
+    color: white
 }
 
 .puzzleDisplay {
     width: 100%;
     display: flex;
     gap: 1rem;
+    flex: 1 1 auto;      /* take remaining space in .solution */
+    min-height: 0;       /* allow child overflow handling */
+    overflow: auto;      /* scrolls vertically (and horizontally if needed) */
 }
 
 .puzzleDisplay > #inputDisplay {
     flex: 1;
     text-align: right;
+    min-width: 0; /* prevent flex overflow causing unwanted horizontal scroll */
 }
 
 .puzzleDisplay > #outputDisplay {
     flex: 1;
     text-align: left;
+    min-width: 0; /* prevent flex overflow causing unwanted horizontal scroll */
+}
+
+.footer {
+    width: 100%;
+    padding: 1rem 0;
+    margin-top: 1rem;
+    flex-shrink: 0;
 }

@@ -17,17 +17,18 @@
             </div>
             <div id="days" class="days"></div>
             <div class="solution">
-                <div class="fileInput">
-                    <input type="file" id="puzzleInput" />
-                    <span id="fileName" class="fileName">No file selected</span>
-                    <span id="recordCount" class="recordCount">0 records</span>
-                    <progress id="fileProgress" value="0" max="100"></progress>
-                </div>
-                <div class="status">
-                    <span id="ready" class="puzzle">Ready</span>
-                    <span id="solving" class="">Solving...</span>
-                    <span id="done" class="">Done!</span>
-                    <span id="answer" class="answer">Answer</span>
+                <div id="status" class="status">
+                    <span id="puzzleName" class="activeStep">Select puzzle</span>
+                    <span id="inputFile" class="statusStep">
+                        <input type="file" id="fileChooser"/>
+                        <span id="fileNameDisplay"></span>
+                        <span id="recordCount"></span>
+                    </span>
+                    <span id="stage" class="statusStep">
+                        <span id="stageText" class=""></span>
+                        <progress id="fileProgress" value="0" max="100"></progress>
+                    </span>
+                    <span id="answer" class="statusStep"></span>
                 </div>
                 <div class="puzzleDisplay">
                     <div id="inputDisplay" class="inputDisplay">Input Display</div>
