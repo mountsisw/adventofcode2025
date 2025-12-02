@@ -4,6 +4,7 @@ import { doPart } from './aocFW.js';
 const dateCellInformation = new Map(); // used to store info about each date cell
 const solutions = new Map(); // used to store solution info
 solutions.set("1", {title: "Secret Entrance", part1: "Day1/Part1.js", part2: "Day1/Part2.js", bg: "Day1/Day1.png"});
+solutions.set("2", {title: "Gift Shop", part1: "Day2/Part1.js", part2: "Day2/Part2.js", bg: "Day2/Day2.png"});
 
 // Make doPart available globally for javascript: URLs
 // @ts-ignore

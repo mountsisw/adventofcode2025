@@ -59,6 +59,7 @@ export function doPart(solutionModule) {
                                     const answerDisplay = document.getElementById("answer");
                                     answerDisplay.innerText = `Answer => ${answer}`;
                                     answerDisplay.className = "activeStep";
+                                    answerDisplay.onclick = () => { navigator.clipboard.writeText(String(answer)); };
                                 }, 0);
                             }
                         }, 0);

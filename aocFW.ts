@@ -70,6 +70,7 @@ export function doPart(solutionModule : string)
                                     const answerDisplay: HTMLSpanElement = <HTMLSpanElement> document.getElementById("answer")!;
                                     answerDisplay.innerText = `Answer => ${answer}`;
                                     answerDisplay.className = "activeStep";
+                                    answerDisplay.onclick = () => { navigator.clipboard.writeText(String(answer)); }
                                 }, 0);
                             }
                         }, 0);
