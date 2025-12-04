@@ -6,6 +6,7 @@ const solutions = new Map(); // used to store solution info
 solutions.set("1", {title: "Secret Entrance", part1: "Day1/Part1.js", part2: "Day1/Part2.js", bg: "Day1/Day1.png"});
 solutions.set("2", {title: "Gift Shop", part1: "Day2/Part1.js", part2: "Day2/Part2.js", bg: "Day2/Day2.png"});
 solutions.set("3", {title: "Lobby", part1: "Day3/Part1.js", part2: "Day3/Part2.js", bg: "Day3/Day3.png"});
+solutions.set("4", {title: "Printing Department", part1: "Day4/Part1.js", part2: "Day4/Part2.js", bg: "Day4/Day4.png"});
 
 // Make doPart available globally for javascript: URLs
 // @ts-ignore
