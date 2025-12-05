@@ -112,4 +112,16 @@ export abstract class PuzzlePart
     constructor(protected inputDisplay: HTMLDivElement, protected outputDisplay: HTMLDivElement) {}
     public processRecord(record: string) : boolean { return true; }
     public abstract calculateAnswer() : any;
+    protected displayInput(text: string)
+    {
+        const div = document.createElement("div");
+        div.innerText = text;
+        this.inputDisplay.appendChild(div);
+    }
+    protected displayOutput(text: string)
+    {
+        const div = document.createElement("div");
+        div.innerText = text;
+        this.outputDisplay.appendChild(div);
+    }
 }

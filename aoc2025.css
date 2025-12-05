@@ -136,13 +136,13 @@ progress {
 }
 
 .puzzleDisplay > #inputDisplay {
-    flex: 1;
+    flex: auto;
     text-align: right;
     min-width: 0; /* prevent flex overflow causing unwanted horizontal scroll */
 }
 
 .puzzleDisplay > #outputDisplay {
-    flex: 1;
+    flex: auto;
     text-align: left;
     min-width: 0; /* prevent flex overflow causing unwanted horizontal scroll */
 }

@@ -98,5 +98,15 @@ export class PuzzlePart {
         this.outputDisplay = outputDisplay;
     }
     processRecord(record) { return true; }
+    displayInput(text) {
+        const div = document.createElement("div");
+        div.innerText = text;
+        this.inputDisplay.appendChild(div);
+    }
+    displayOutput(text) {
+        const div = document.createElement("div");
+        div.innerText = text;
+        this.outputDisplay.appendChild(div);
+    }
 }
 //# sourceMappingURL=aocFW.js.map
