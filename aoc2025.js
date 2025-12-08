@@ -9,6 +9,7 @@ solutions.set("3", {title: "Lobby", part1: "Day3/Part1.js", part2: "Day3/Part2.j
 solutions.set("4", {title: "Printing Department", part1: "Day4/Part1.js", part2: "Day4/Part2.js", bg: "Day4/Day4.png"});
 solutions.set("5", {title: "Cafeteria", part1: "Day5/Part1.js", part2: "Day5/Part2.js", bg: "Day5/Day5.png"});
 solutions.set("6", {title: "Trash Compactor", part1: "Day6/Part1.js", part2: "Day6/Part2.js", bg: "Day6/Day6.png"});
+solutions.set("7", {title: "Laboratories", part1: "Day7/Part1.js", part2: "Day7/Part2.js", bg: "Day7/Day7.png"});
 
 // Make doPart available globally for javascript: URLs
 // @ts-ignore
