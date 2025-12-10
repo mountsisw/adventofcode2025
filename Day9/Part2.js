@@ -1,5 +1,5 @@
 import { PuzzlePart } from "../aocFW.js";
-export default class Part1 extends PuzzlePart {
+export default class Part2 extends PuzzlePart {
     constructor() {
         super(...arguments);
         this.redTiles = new Array();

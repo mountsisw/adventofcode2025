@@ -2,7 +2,7 @@ import { PuzzlePart } from "../aocFW.js";
 
 type Point = { x: number, y: number};
 
-export default class Part1 extends PuzzlePart
+export default class Part2 extends PuzzlePart
 {
     private redTiles : Array<Point> = new Array();
     private rows : Map<number, Array<[number, number]>> = new Map();
