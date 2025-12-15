@@ -12,6 +12,8 @@ solutions.set("6", {title: "Trash Compactor", part1: "Day6/Part1.js", part2: "Da
 solutions.set("7", {title: "Laboratories", part1: "Day7/Part1.js", part2: "Day7/Part2.js", bg: "Day7/Day7.png"});
 solutions.set("8", {title: "Playground", part1: "Day8/Part1.js", part2: "Day8/Part2.js", bg: "Day8/Day8.png"});
 solutions.set("9", {title: "Movie Theater", part1: "Day9/Part1.js", part2: "Day9/Part2.js", bg: "Day9/Day9.png"});
+solutions.set("10", {title: "Factory", part1: "Day10/Part1.js", part2: "Day10/Part2.js", bg: "Day10/Day10.png"});
+solutions.set("11", {title: "Reactor", part1: "Day11/Part1.js", part2: "Day11/Part2.js", bg: "Day11/Day11.png"});
 
 // Make doPart available globally for javascript: URLs
 // @ts-ignore

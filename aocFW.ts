@@ -62,9 +62,10 @@ export function doPart(solutionModule : string)
                                 fileProgress.style.display = "none";
                                 stageText.innerText = "Solving ..."
                                 stageText.style.display = "block";
-                                window.setTimeout(() =>
+                                window.setTimeout(async () =>
                                 {
-                                    const answer = part.calculateAnswer();
+                                    let answer = part.calculateAnswer();
+                                    if (typeof answer.then === 'function') answer = await answer;
                                     stageText.innerText = "Done";
                                     stage.className = "statusStep";
                                     const answerDisplay: HTMLSpanElement = <HTMLSpanElement> document.getElementById("answer")!;
@@ -110,7 +111,7 @@ function resetElements(firstElement: HTMLElement)
 export abstract class PuzzlePart
 {
     constructor(protected inputDisplay: HTMLDivElement, protected outputDisplay: HTMLDivElement) {}
-    public processRecord(record: string) : boolean { return true; }
+    public abstract processRecord(record: string) : boolean;
     public abstract calculateAnswer() : any;
     protected displayInput(text: string)
     {

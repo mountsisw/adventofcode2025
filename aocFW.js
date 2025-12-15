@@ -52,8 +52,10 @@ export function doPart(solutionModule) {
                                 fileProgress.style.display = "none";
                                 stageText.innerText = "Solving ...";
                                 stageText.style.display = "block";
-                                window.setTimeout(() => {
-                                    const answer = part.calculateAnswer();
+                                window.setTimeout(async () => {
+                                    let answer = part.calculateAnswer();
+                                    if (typeof answer.then === 'function')
+                                        answer = await answer;
                                     stageText.innerText = "Done";
                                     stage.className = "statusStep";
                                     const answerDisplay = document.getElementById("answer");
@@ -97,7 +99,6 @@ export class PuzzlePart {
         this.inputDisplay = inputDisplay;
         this.outputDisplay = outputDisplay;
     }
-    processRecord(record) { return true; }
     displayInput(text) {
         const div = document.createElement("div");
         div.innerText = text;
